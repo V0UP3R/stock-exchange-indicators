@@ -1,1 +1,20 @@
+# Arquivos gerados pelo Python
+*.pyc
+__pycache__/
+
+# Ambiente virtual
 venv/
+.env
+
+# Arquivos de log
+*.log
+
+# Arquivos de dados ou saída
+arquivo.csv
+
+# Dependências instaladas
+# Este padrão ignora todos os diretórios chamados `dist` ou `build`
+/dist/
+/build/
+
+# Outros arquivos e diretórios específicos
