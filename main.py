@@ -1,8 +1,9 @@
-from flask import Flask, jsonify
+from flask import Flask, jsonify, render_template
 import fundamentus
 import pandas as pd
+import os
 
-app = Flask(__name__)
+app = Flask(__name__, template_folder='static')
 
 @app.route('/ativo', methods=['GET'])
 def obter_informacoes_ativo():
@@ -24,11 +25,9 @@ def obter_informacoes_ativo():
         for filter in arFilters:
             df = df[filter]
             print('tamanho ' + str(df.shape[0]))
-        filtered_dfs.append(df)
-        final_df = pd.concat(filtered_dfs)
         df.to_csv('arquivo.csv')
-        return jsonify(final_df.to_dict(orient='records')), 200
-        # return 'acabou'
+        ativos = df.to_dict()
+        return render_template('ativos.html', ativos=ativos)
     except Exception as e:
         return jsonify({'erro': str(e)}), 500
 
