@@ -1,51 +1,67 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" href="/static/favicon.ico">
     <title>Ativos</title>
     <style>
+        body {
+            font-family: Montserrat, sans-serif;
+        }
+
         table {
             border-collapse: collapse;
             width: 100%;
         }
-        th, td {
+
+        th,
+        td {
             border: 1px solid #dddddd;
             text-align: left;
             padding: 8px;
         }
+
         th {
             background-color: #f2f2f2;
         }
+
+        h1 {
+            text-transform: uppercase;
+            font-weight: 700;
+        }
     </style>
 </head>
+
 <body>
-    <h1>Lista de Ativos</h1>
+    <h1>Lista dos Melhores Ativos</h1>
     <table>
         <thead>
             <tr>
                 <th> - </th>
                 {% set headers_seen = [] %}
                 {% for _, values in ativos.items() %}
-                    {% for value, _ in values.items() %}
-                        {% if value not in headers_seen %}
-                            <th>{{ value }}</th>
-                            {% set _ = headers_seen.append(value) %}
-                        {% endif %}
-                    {% endfor %}
+                {% for value, _ in values.items() %}
+                {% if value not in headers_seen %}
+                <th>{{ value }}</th>
+                {% set _ = headers_seen.append(value) %}
+                {% endif %}
+                {% endfor %}
                 {% endfor %}
             </tr>
         </thead>
         <tbody>
             {% for ativo, valores in ativos.items() %}
-                <tr>
-                    <td>{{ ativo }}</td>
-                    {% for valor in valores.values() %}
-                        <td>{{ valor|float|round(3) }}</td>
-                    {% endfor %}
-                </tr>
+            <tr>
+                <td>{{ ativo }}</td>
+                {% for valor in valores.values() %}
+                <td>{{ valor|float|round(3) }}</td>
+                {% endfor %}
+            </tr>
             {% endfor %}
         </tbody>
     </table>
 </body>
+
 </html>

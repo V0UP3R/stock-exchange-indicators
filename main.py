@@ -5,7 +5,7 @@ import os
 
 app = Flask(__name__, template_folder='static')
 
-@app.route('/ativo', methods=['GET'])
+@app.route('/ativos', methods=['GET'])
 def obter_informacoes_ativo():
     try:
         df = fundamentus.get_resultado()
